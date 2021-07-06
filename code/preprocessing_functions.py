@@ -4,6 +4,7 @@ import string
 import re
 import nltk
 from nltk.tokenize import ToktokTokenizer
+from bs4 import BeautifulSoup
 
 # function to remove HTML tags
 def remove_html_tags(text):
@@ -28,7 +29,7 @@ def remove_numbers(text):
 
 # function to remove punctuation
 def remove_punctuation(text):
-    text = ''.join([c for c in text if c not in string.punctuation])
+    text = ''.join([c for c in text if c not in string.punctuation.replace(".","")])
     return text
 
 # function for stemming
@@ -41,7 +42,7 @@ def get_stem(text):
 def lemmatize_text(text):
     w_tokenizer = nltk.tokenize.WhitespaceTokenizer()
     lemmatizer = nltk.stem.WordNetLemmatizer()
-    return [lemmatizer.lemmatize(w) for w in w_tokenizer.tokenize(text)]
+    return " ".join([lemmatizer.lemmatize(w) for w in w_tokenizer.tokenize(text)])
 
 
 # function to remove stopwords
@@ -65,7 +66,10 @@ def remove_extra_whitespace_tabs(text):
     pattern = r'^\s*|\s\s*'
     return re.sub(pattern, ' ', text).strip()
 
-
 # function to remove special characters
 def to_lowercase(text):
     return text.lower()
+
+# function to remove long strings
+def remove_long_strings(text):
+    return " ".join([i for i in text.split(" ") if len(i)<25])
