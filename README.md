@@ -6,7 +6,6 @@ The approach used here is the extractive one.
 
 ### TODO :
 Use Abstractive approach
-Use Abstractive approach
 
 ### Some useful links:
 https://towardsdatascience.com/text-summarization-extractive-approach-567fe4b85c23
