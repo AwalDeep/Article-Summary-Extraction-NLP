@@ -21,7 +21,8 @@ class Summarizer:
         word_embeddings = {}
 
         # read the word embeddings file
-        f = open('../GloVe/glove.6B.100d.txt',
+
+        f = open('GloVe/glove.6B.100d.txt',
                  encoding='utf-8')
         for line in f:
             values = line.split()
@@ -37,6 +38,12 @@ class Summarizer:
         :param news_articles_: scraped data as input
         :return: pd.Series
         """
+        if type(news_articles_)==pd.DataFrame:
+            news_articles_ = news_articles_
+        else:
+            temp_dict = {"NewsText": news_articles_}
+            news_articles_ = pd.DataFrame(temp_dict.values(),columns=temp_dict.keys())
+
         news_articles_.dropna(inplace=True)
         news_articles_ = news_articles_[news_articles_["NewsText"] != ""]
         news_articles_["NewsText"] = news_articles_["NewsText"].apply(remove_html_tags)
@@ -97,7 +104,7 @@ class Summarizer:
 
 
 if __name__ == "__main__":
-    news_articles = pd.read_csv("../data/scraped_articles.csv")
+    news_articles = pd.read_csv("data/scraped_articles.csv")
     summ = Summarizer(n=5)
     clean_sentences = summ.preprocess(news_articles)
     summ.create_word_embeddings()
