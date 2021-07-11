@@ -1,5 +1,8 @@
 # Article-Summary-Extraction-NLP
 Given an article, generate its summary
+In NLP, there are two approaches to do the text summarization. 
+The first one, extractive approach, is a simple approach which is extracting key words or sentences from article. 
+The second one, abstractive approach, is generating a new sentences base on given article. It needs more advanced technique.
 The approach used here is the extractive one.
 
 ## TO RUN : 
